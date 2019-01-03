@@ -32,3 +32,15 @@ PLAYER* Room::getPlayers() {
 PLAYER Room::getPlayer(string id) {
 	
 }
+
+
+boolean Room::isAllReady() {
+
+	for (int i = 0; i < sizeof(players); i++) {
+		if (!players[i]->isReady()) {
+			return false;
+		}
+	}
+
+	return true;
+}

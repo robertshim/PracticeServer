@@ -105,10 +105,16 @@ unsigned WINAPI ThreadProcess(LPVOID param) {
 				PLAYER player = new Player(message->writer,sockInfo->hClntSock);
 				gameServer->joinRoom(message->roomId, player);
 				break;
-
 			case CHAT:
 				Room* room = gameServer->whereAmI(message->writer);
-				gameServer->sendEveryOne(room, message);
+				gameServer->sendBroadCast(room, message);
+				break;
+
+			case READY:
+				Room* room = gameServer->whereAmI(message->writer);
+				PLAYER player = room->getPlayer(message->writer);
+				player->setReady();
+				room->isAllReady();
 				break;
 			default:
 				break;

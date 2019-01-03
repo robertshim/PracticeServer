@@ -6,6 +6,7 @@
 using namespace std;
 typedef Player* PLAYER;
 
+
 class Room {
 private:
 	unsigned int id;
@@ -21,4 +22,6 @@ public:
 	PLAYER* getPlayers();
 	PLAYER getPlayer(string id);
 	boolean isFull();
+
+	boolean isAllReady();
 };

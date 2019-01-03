@@ -20,8 +20,11 @@ private:
 	SOCKET socket;
 	Job job;
 	Status status;
+	boolean flagReady;
 public:
 	Player(string id, SOCKET socket);
 	string getId();
 	SOCKET getSocket();
+	boolean isReady();
+	void setReady();
 };

@@ -21,6 +21,5 @@ public:
 	boolean joinRoom(unsigned int id, PLAYER player);
 	vector<Room> getRoomList();
 	Room* whereAmI(string id);
-
-	boolean sendEveryOne(Room* room,MESSAGE* message);
+	boolean sendBroadCast(Room* room,MESSAGE* message);
 };

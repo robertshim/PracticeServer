@@ -50,11 +50,18 @@ Room* GameServer::searchRoom(unsigned int id) {
 }
 
 
-boolean GameServer::sendEveryOne(Room* room, MESSAGE* message) {
+boolean GameServer::sendBroadCast(Room* room, MESSAGE* message) {
 	PLAYER* players = room->getPlayers;
 
 	for (int i = 0; i < sizeof(players); i++) {
 		SOCKET socket = players[i]->getSocket();
-		//다시 만들기
+		LPIO_DATA ioData = (LPIO_DATA)calloc(1, sizeof(IO_DATA));
+		ioData->wsaBuf.buf = ioData->buffer;
+		ioData->wsaBuf.len = BUF_SIZE;
+		ioData->rwMode = WRITE;
+
+		memcpy(ioData->buffer,message,BUF_SIZE);
+
+		WSASend(socket,&ioData->wsaBuf,1,NULL,0,&ioData->overlapped,NULL);
 	}
 }
